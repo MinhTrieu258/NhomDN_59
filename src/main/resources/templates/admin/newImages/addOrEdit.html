@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/main}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<body>
+	<article layout:fragment="content">
+		<div class="col  mt-4">
+			<form action="/admin/newImages/saveOrUpdate" method="post"
+				enctype="multipart/form-data" th:object="${newImage}">
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="${newImage.isEdit ? 'Chỉnh sửa tin tức' : 'Thêm mới tin tức'}">Add
+							New</h2>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-7 mt-4">
+								<input type="hidden" th:field="*{isEdit}">
+								<div class="form-group" th:if="${newImage.isEdit}">
+									<label for="productId">Mã tin tức</label> <input type="text"
+										class="form-control" name="productId" id="productId"
+										placeholder="" aria-describedby="productIdHid"
+										th:field="*{id}"> <small id="productIdHid"
+										class="form-text text-muted">New Id is required</small>
+								</div>
+
+								<div class="form-group mt-2">
+									<label for="name">Ngày tạo</label> <input type="text"
+										class="form-control" name="name" id="name" placeholder=""
+										aria-describedby="dateHid" th:field="*{createdDate}">
+									<small
+										th:if="${#fields.hasErrors('createdDate')}" id="dateHid"
+										class="form-text text-muted">
+										<div class="alert alert-danger mt-2" th:each="error : ${errors}">
+											<strong  th:text="${error.defaultMessage}">Động cơ không được trống</strong>
+										</div>
+									</small>
+								</div>
+
+								<div class="form-group mt-2">
+									<label for="name">Tiêu đề</label> <input type="text"
+										class="form-control" name="name" id="name" placeholder=""
+										aria-describedby="titlesHid" th:field="*{titles}"> <small
+										th:if="${#fields.hasErrors('titles')}" id="titlesHid"
+										class="form-text text-muted">
+										<div class="alert alert-danger mt-2" th:each="error : ${errors}">
+											<strong  th:text="${error.defaultMessage}">Động cơ không được trống</strong>
+										</div>
+									</small>
+								</div>
+								<div class="form-group mt-2">
+									<label for="">Nội dung</label>
+									<textarea class="form-control" th:field="*{contents}"
+										name="description" rows="5"></textarea>
+										
+										<small
+										th:if="${#fields.hasErrors('contents')}" id="contentsHid"
+										class="form-text text-muted">
+										<div class="alert alert-danger mt-2" th:each="error : ${errors}">
+											<strong  th:text="${error.defaultMessage}">Động cơ không được trống</strong>
+										</div>
+									</small>
+								</div>
+
+
+								<div class="form-group mt-2">
+									<label>Mã hình người viết</label> 
+									<select th:field="*{news_id}"
+										class="form-control" name="id">
+										<option th:each="item : ${news}" th:value="${item.id}"
+											th:text="${item.id}" th:selected="${item.id == newImage.news_id}">
+											New</option>
+
+									</select>
+								</div>
+
+								<div class="col-3 mt-2">
+									<script>
+										function chooseFile(fileInput) {
+											if (fileInput.files
+													&& fileInput.files[0]) {
+												var reader = new FileReader();
+												reader.onload = function(e) {
+													$('#image').attr('src',
+															e.target.result);
+												}
+												reader
+														.readAsDataURL(fileInput.files[0]);
+											}
+										}
+									</script>
+								</div>
+
+								<img id="image" 
+								src="/admin/newImages/images/anh1.jpg"
+									th:src="${newImage.image !=null ? '/admin/newImages/images' + newImage.image : 'images/anh1.png'}"
+									width="50%" alt=""
+									class="img-fluid ${3|rounded-top,rounded-circle,rounded-bottom,rounded-left,rounded-right}" />
+								<div class="form-group">
+									<label for="productImage">Image File</label> 
+									<input type="file"
+										onchange="chooseFile(this)" name="imageFile" id="productImage"
+										class="form-control-file"> <small
+										class="form-text text-muted">Images is required</small>
+								</div>
+
+
+
+							</div>
+
+
+
+						</div>
+
+
+					</div>
+
+				</div>
+				<div class="card-footer text-muted">
+					<a th:href="@{/admin/newImages/add}" class="btn btn-success">Làm mới</a>
+					<button class="btn btn-primary"
+						th:text="${newImage.isEdit ? 'Sửa' : 'Lưu'}">Save</button>
+					
+				</div>
+		</div>
+
+
+
+		</form>
+		</div>
+
+
+
+	</article>
+
+</body>
+</html>

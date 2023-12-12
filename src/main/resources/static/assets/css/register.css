@@ -1,0 +1,38 @@
+
+body {
+  height: 100%;
+  background-image:url(/images/backgroundimg1.jpg);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-register {
+  width: 100%;
+  max-width: 600px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-register .checkbox {
+  font-weight: 400;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+

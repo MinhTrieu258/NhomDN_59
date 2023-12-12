@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tin Tức</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+	crossorigin="anonymous">
+	
+</script>
+<style>
+.sanphamlienquan ul li {
+	list-style-type: none;
+}
+
+.sanphamlienquan ul {
+	margin: 10px;
+}
+</style>
+
+</head>
+
+<body>
+	<article layout:fragment="content">
+		<nav class=""
+			style="font-size: 20px; margin-left: 50px; --bs-breadcrumb-divider: '&gt;';"
+			aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+			</ol>
+		</nav>
+		<hr>
+		<div class="container-fluid mt-4">
+
+			<div class="row">
+				<div class="col-sm-9">
+					<div style="border: none;" class="card  h-100">
+						<h5 class="fw-bold">TIN TỨC</h5>
+						<div class="w-100 h-100 mt-4">
+							<div th:each="news : ${newsList}">
+								<div class="card w-100 h-100 m-auto">
+									<div th:if="${not #lists.isEmpty(news.images)}">
+										<img th:src="@{'/assets/images/' + ${news.images[4].image}}"
+											width="100%" height="100%" />
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div style="height: 650px;" class="col-sm-3">
+					<div style="border: none;" class="card h-100">
+						<h6 class="fw-bold">BÀI VIẾT LIÊN QUAN</h6>
+						<hr>
+						<div th:each="news : ${newsList}">
+							<div class=" h-25 w-100">
+								<div class="row ">
+									<div class="col-sm-6">
+										<img th:src="@{'/assets/images/' + ${news.images[0].image}}"
+											width="130" />
+									</div>
+									<div class="col-sm-6 ">
+										<p class="fw-bold">
+											<a class="text-black"
+												style="text-decoration: none; font-size: 12px;" href="#"><span
+												th:text="${news.images[0].titles}"></span></a>
+										</p>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div th:each="news : ${newsList}">
+							<div class=" h-25 w-100">
+								<div class="row ">
+									<div class="col-sm-6">
+										<img th:src="@{'/assets/images/' + ${news.images[1].image}}"
+											width="130" />
+									</div>
+									<div class="col-sm-6 ">
+										<p class="fw-bold">
+											<a class="text-black"
+												style="text-decoration: none; font-size: 12px;" href="#"><span
+												th:text="${news.images[1].titles}"></span></a>
+										</p>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<div th:each="news : ${newsList}">
+							<div class=" h-25 w-100">
+								<div class="row ">
+									<div class="col-sm-6 ">
+										<img th:src="@{'/assets/images/' + ${news.images[2].image}}"
+											width="130" />
+									</div>
+									<div class="col-sm-6">
+										<p class="fw-bold">
+											<a class="text-black"
+												style="text-decoration: none; font-size: 12px;" href="#"><span
+												th:text="${news.images[2].titles}"></span></a>
+										</p>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</div>
+
+			</div>
+
+
+			<hr>
+
+			<div class="col-sm-12">
+				<div class=" m-auto p-4">
+					<div th:each="news : ${newsList}">
+						<h4 class="fw-bold">
+							<b><span th:text="${news.images[4].titles}"></span></b>
+						</h4>
+						<p>
+							<span th:text="${news.images[4].contents}"></span>
+						</p>
+					</div>
+
+
+					<hr>
+
+					<div style="border: none;" class=" h-100">
+
+						<div th:each="news : ${newsList}">
+							<div th:each="image : ${news.images}">
+								<div class=" h-25 w-100">
+									<div class="row w-75 h-100 m-auto">
+										<div class="col-sm-4 m-auto mt-3">
+											<img th:src="@{'/assets/images/' + ${image.image}}"
+												width="90%" height="90%" />
+										</div>
+
+										<div class="col-sm-8 m-auto">
+											<p class="fw-bold py-1">
+												<a class="text-black"
+													style="text-decoration: none; margin: 10px; font-size: 20px"
+													href="#"><span th:text="${image.titles}"></span></a>
+											</p>
+											<p>
+												<span th:text="${image.contents}"></span>
+											</p>
+											<p>
+												<span th:text="${image.createdDate}"></span>
+											</p>
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+					</div>
+
+				</div>
+			</div>
+			<hr>
+			<!-- Trang comments.html -->
+
+
+			<!-- Trang comments.html -->
+			<h6>Chia sẻ</h6>
+
+			<hr>
+     
+	<div class="sanphamlienquan p-3 col-7 card">
+				<h4>Bình luận</h4>
+				<div th:each="comment : ${listComment}" class="card"
+					style="border: none;">
+
+					<div class=" h-25 w-100">
+						<div class="row h-100 m-auto">
+							<div class="col-sm-4 m-auto mt-3">
+								  
+								<img src="/assets/images/-1407968806.jpg" alt="" width="100">
+							</div>
+
+							<div class="col-sm-8 m-auto">
+						
+								<p class="fw-bold py-1">
+									<a class="text-black"
+										style="text-decoration: none; margin: 10px; font-size: 10px"
+										th:text="${comment.account.username}"></a>
+								</p>
+								<p>
+									
+								
+									<span th:text="${comment.createDate}"></span>
+								</p>
+								<p>
+									
+									
+									<span th:text="${comment.cmtDescription}"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<form  
+			th:if="${#authorization.expression('isAuthenticated()')}"
+			
+			 method="post" th:action="@{/user/news/saveOrUpdate}" th:object="${comment}">
+				<input type="hidden" th:field="*{isEdit}">
+								<div class="form-group" th:if="${comment.isEdit}">
+									<label for="productId">Mã bình luận</label> <input type="text"
+										class="form-control" name="productId" id="productId"
+										placeholder="" aria-describedby="productIdHid"
+										th:field="*{cmtId}">
+								</div>
+								
+				
+<div class="form-group">
+					<label for="name">Người viết</label> <input type="text"
+						class="form-control" th:field="*{username}" th:value="${#authentication.principal.username}" th:placeholder="${#authentication.principal.username}"
+						aria-describedby="nameHid" readonly="readonly"> 
+				</div>
+				
+				<div class="form-group">
+    <label for="email">Email</label>
+   
+    <input type="text" class="form-control" th:placeholder="${#authentication.principal.email}" readonly="readonly">
+</div>
+							
+				<div class="form-group" hidden>
+					<label for="name">Trạng thái</label> <input type="text"
+			th:value="${status}"			class="form-control" th:field="*{status}" placeholder=""
+						aria-describedby="nameHid" readonly> 
+				</div>
+				
+				<div class="form-group" hidden>
+    <label for="name">Ngày viết</label> 
+
+    <input type="text" class="form-control" th:field="*{createDate}" th:value="${#dates.format(comment.createDate, 'dd-MM-yyyy')}" readonly>
+</div>
+				<div class="form-group">
+					<label for="">Nhận xét của bạn:</label>
+					<textarea class="form-control" id=""
+						th:field = "*{cmtDescription}" name="" rows="3" required></textarea>
+				</div>
+				<button type="submit" class="btn btn-info">Bình luận</button>
+			</form>
+			
+			<hr>
+
+
+
+
+
+		</div>
+	</article>
+</body>
+
+</html>

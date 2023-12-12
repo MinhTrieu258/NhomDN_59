@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/main}" xmlns:th="http://www.thymeleaf.org">
+<head><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<body>
+   <article layout:fragment="content">
+           <div class="col  mt-4">
+			<div class="card">
+				
+				<div class="card-body">
+					
+					<div th:if="${message != null}" class="alert alert-primary"
+						role="alert">
+						<i>[[${message}]]</i>
+					</div>
+					<form th:action="@{/admin/comments/searchpaginated}">
+						<div class="row mt-2 mb-2">
+							<div class="col-8">
+
+								<div class="form-inline float-left">
+									<label for="name">Tên người bình luận</label> <input type="text"
+										class="form-control ml-2" id="name" name="fullname" placeholder=""
+										aria-describedby="nameHid">
+
+
+								</div>
+
+
+							</div>
+							<div class="float-right col-4 mt-4">
+								<button class="btn btn-outline-primary ml-2">Tìm kiếm</button>
+								
+							</div>
+						</div>
+						  <div class="row" th:if="${!customerPage.hasContent()}">
+                    	<div class="col">
+                    		<div class="alert alert-danger">
+                    			<strong>Không thể tìm thấy khách hàng bạn muốn tìm</strong>
+                    		</div>
+                    	</div>
+                    </div>
+					</form>
+					
+					
+					
+					
+					<table class="table table-striped table-inverse" th:if="${customerPage.hasContent()}">
+						<thead class="thead-inverse">
+							<tr>
+
+								<th>Mã bình luận</th>
+								<th>Người viết</th>
+								<th>Nội dung</th>
+								<th>Trạng thái</th>
+								<th></th>
+								<th></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="comment : ${customerPage.content}">
+								
+								<td th:text="${comment.cmtId}">
+								
+								 </td>
+								 <td th:text="${comment.account.username}">
+								
+								 </td>
+								  <td th:text="${comment.cmtDescription}">
+								
+								 </td>
+								 <td th:text="${comment.status}">
+								
+								 </td>
+								<td></td>
+								<td>
+
+									<a class="btn btn-outline-info" th:href="@{'/admin/comments/edit/' + ${comment.cmtId}}"
+									><i class="fas fa-pencil-alt"></i></a> <a class="btn btn-outline-info"
+									th:href="@{'/admin/comments/delete/' + ${comment.cmtId}}"
+									><i class="fas fa-trash-alt"></i></a>
+								</td>
+							
+								
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+				<div class="card-footer text-muted">
+					<form action="" >
+						<div class=" visually-hidden float-left" type="hidden">
+							<label for="size">Số lượng hiển thị</label> 
+							<select name="size"
+								id="size" class="form-control" onchange="this.form.submit()">
+								<option th:selected="${customerPage.size==2}" value="1">5</option>
+								
+							
+							</select>
+						</div>
+					</form>
+					<nav aria-label="Page navigation"
+						th:if="${customerPage.totalPages > 0}">
+						<ul class="pagination justify-content-center">
+							<li
+								th:class="${1==customerPage.number + 1} ?'page-item active':'page-item'">
+								<a
+								th:href="@{/admin/comments/searchpaginated(name=${name},size=${2},page=${1})}"
+								class="page-link">Đầu trang</a>
+							</li>
+
+							<li class="page-item active"
+								th:each="pageNumber : ${pageNumbers}"
+								th:if="${customerPage.totalPages > 1}"
+								th:class="${pageNumber == customerPage.number + 1} ?'page-item active':'page-item'">
+								<a
+								th:href="@{/admin/comments/searchpaginated(name=${name},size=${2},page=${pageNumber})}"
+								class="page-link" th:text="${pageNumber}"></a>
+							</li>
+
+
+							<li
+								th:class="${customerPage.totalPages ==customerPage.number + 1} ? 'page-item active' : 'page-item' ">
+								<a
+								th:href="@{/admin/comments/searchpaginated(name=${name},size=${2},page=${customerPage.totalPages})}"
+								class="page-link">Cuối trang</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			
+			</div>
+
+
+		</div>
+
+         
+          
+      </article>
+        
+</body>
+</html>

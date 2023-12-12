@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  
+  .is-align-items-center {
+    align-items: center!important;
+  }
+</style>
+<body>
+  <article layout:fragment="content" >
+    <div class="container-fluid">
+  <nav class="py-3" style="font-size: 20px; margin-left: 50px;--bs-breadcrumb-divider: '>'; " aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+    </ol>
+    </nav>
+
+  <hr>
+  <div id="messageDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="messageDialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="messageDialogLabel">Thông báo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-primary" th:if="${message != null}" role="alert">
+            <i th:text="${message}">[[${message}]]</i>
+          </div>
+          <div class="alert alert-danger" th:if="${error != null}" role="alert">
+            <i th:text="${error}">[[${error}]]</i>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      /* Display the messageDialog if message or error is present */
+      var message = /*[[${message}]]*/ null;
+      var error = /*[[${error}]]*/ null;
+  
+      if (message || error) {
+        $('#messageDialog').modal('show');
+      }
+    });
+    /*]]>*/
+  </script>
+  
+  
+<main class="container-fluid">
+
+<section class="vh-100 p-5">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-md-9 col-lg-6 col-xl-5">
+      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+      class="img-fluid" alt="Sample image">
+    </div>
+
+    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      <form th:action="@{/security/login}" method="post" >
+      <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+        <p class="lead fw-normal mb-0 me-3"><h2>Đăng nhập</h2></p>
+
+
+      </div>
+        <p class="mx-3">
+          <span>Nếu bạn chưa có tài khoản,  <a th:href="@{/Signup}">đăng ký tại đây</a></span>
+        </p>
+
+      <div class="divider d-flex align-items-center">
+        <p class="text-center fw-bold mx-3 mb-0">Hoặc</p>
+      </div>
+        <br>
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="form3Example3" name="username" class="form-control form-control-lg"
+        placeholder="Nhập tên đăng nhập" />
+        <label class="form-label" for="form3Example3">Tên đăng nhập</label>
+      </div>
+  
+      <!-- Password input -->
+      <div class="form-outline mb-3">
+        <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+        placeholder="Nhập mật khẩu" />
+        <label class="form-label" for="form3Example4">Mật khẩu</label>
+      </div>
+  
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Checkbox -->
+        <div class="form-check mb-0">
+        <input class="form-check-input me-2" name="rememberMe" type="checkbox" value="" id="form2Example3" />
+        <label class="form-check-label" for="form2Example3">
+          Hãy ghi nhớ ?
+        </label>
+        </div>
+        <a href="/changepassword" class="text-body">Quên mật khẩu?</a>
+      </div>
+  
+      <div class="text-center text-lg-start mt-4 pt-2">
+        <button type="submit" class="btn btn-primary btn-lg"
+        style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng nhập</button>
+
+      </div>
+  
+      </form>
+
+      
+      
+    </div>
+    <!--
+    <div class="row">
+      <a href="/oauth2/authorization/google" class=" col-sm-6 text-center">
+        <img src="https://account.cellphones.com.vn/_nuxt/img/image45.93ceca6.png" class="img-fluid " width="50px" > 
+        <p>Google</p>
+        
+       </a>
+       
+      </div>
+      -->
+    </div>
+  </div>
+  
+  </section>
+</main>
+  </div>
+</article>
+</body>
+</html>

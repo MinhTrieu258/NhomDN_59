@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ</title>
+    
+    <style>
+        n{
+            color: red;
+        }
+        iframe{
+            width: 100%;
+            height: 85%;
+        }
+    </style>
+</head>
+<body>
+    <article layout:fragment="content" >
+        <nav class="" style="font-size: 20px; margin-left: 50px;--bs-breadcrumb-divider: '>'; " aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Liên hệ</li>
+            </ol>
+        </nav>
+        <hr>
+    <div class="container-fluid mt-3">
+
+        <div class="row">
+            <div class="col-sm-7">
+                <h3>Liên Hệ</h3>
+                <p>Nếu bạn có thắc mắc với chúng tôi xin hãy liên hệ thông tin dưới đây. Chúng tôi sẽ trả lời ngay sau khi nhận được lời nhắn của bạn.</p>
+                <form action="">
+                    <div class="form-group m-2">
+                      <label for="">Số điện thoại<n>*</n></label>
+                      <input type="text"
+                        class="form-control bg-secondary bg-opacity-25" name="" id="" aria-describedby="helpId" placeholder="0392322791">
+                    </div>
+    
+                    <div class="form-group m-2">
+                        <label for="">Địa chỉ<n>*</n></label>
+                        <input type="email"
+                          class="form-control bg-secondary bg-opacity-25" name="" id="" aria-describedby="helpId" placeholder="ctytnhhhyundaisonghan@gmai.com">
+                      </div>
+    
+                     
+                    
+    
+                </form>
+            </div>
+    
+            <div class="col-sm-5 mt-5">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.3113987584575!2d108.21042596728694!3d16.04932263734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421904a09ef769%3A0x222a1c8ceeae437b!2zODYgRHV5IFTDom4sIEjDsmEgVGh14bqtbiBOYW0sIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1699152617529!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+           <br>
+           <br>
+    </div>
+</article>
+    
+</body>
+</html>

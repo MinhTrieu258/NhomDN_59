@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+	crossorigin="anonymous"></script>
+
+
+
+
+<style>
+.sanphamlienquan button {
+	margin: 3px;
+}
+
+.sanphamlienquan button:hover {
+	background-color: rgb(22, 122, 194);
+}
+
+.content-image {
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 100%;
+	height: 500px;
+	margin-top: 20px;
+	margin-left: 10px;
+	transition: background-image 0.3s;
+	transform: translateX(0px);
+	animation: float 6s ease-in-out infinite;
+}
+
+span {
+	color: green;
+}
+
+.sanphamlienquan ul li {
+	list-style-type: none;
+	margin: 10px;
+}
+
+table {
+	width: 50%;
+	border-collapse: collapse;
+	margin: 20px;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body class="container-fluid">
+	<article layout:fragment="content">
+		<nav class="m-auto"
+			style="font-size: 20px; margin-left: 50px; --bs-breadcrumb-divider: '&gt;';"
+			aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/product/list">Danh
+						Sách Xe</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Chi tiết
+					xe</li>
+			</ol>
+		</nav>
+		<hr>
+		<div th:object="${product}"></div>
+		<div style="height: 880px;" class="row p-2">
+			<div class="col-sm-9">
+				<div class="card">
+					<div class="card-body">
+						<div class=" content-image" id="bike">
+							<img th:src="@{|/assets/images/${product.image}|}"
+								class="img-fluid">
+						</div>
+
+
+					</div>
+					<hr>
+					<div class="card-title m-lg-3">
+						<div class="row col-12 col-sm-11 col-lg-12 col-md-12 row-cols-12">
+							<div class="col-sm-7">
+								<h2 th:text="${product.name}"></h2>
+
+								<p class="fw-bold">
+									Mã xe Hyundai: <b th:text="${product.id}"></b><br> Năm sản
+									xuất: <b th:text="${product.manufacturingYear}"></b>
+								</p>
+
+								<p>
+								<ul>
+									<li>Xăng 1.5L Duratec 16 Van</li>
+									<li>Hệ thống nhiên liệu phun đa điểm</li>
+									<li>Hệ thống trợ lái lực điện điều khiển từ</li>
+									<li>Hộp số tự động 6 cấp PowerShift</li>
+								</ul>
+								</p>
+							</div>
+
+							<div class="col-sm-5">
+								<div class="row">
+									<div
+										class="card-header btn-lg  text-white w-75 m-auto text-center ">
+										<p class="price text-danger m-auto ">Giá:
+											[[${#numbers.formatInteger(product.price, 0, 'COMMA')}]] đ</p>
+									</div>
+									<button th:attr="ng-click=@{|cart.add(${product.id})|}"
+										class="btn btn-default btn-sm text-white"
+										style="background-color: rgb(81, 81, 138);">
+										<span class="glyphicon glyphicon-shopping-cart"> </span> <b>
+											Mua hàng </b>
+
+
+									</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-3 ">
+				<div class="card w-100 ">
+					<div class=" w-100 h-25">
+						<div class="card w-75 h-75 m-auto">
+							<img th:src="@{|/assets/images/${product.image}|}"
+								class="img-fluid">
+						</div>
+					</div>
+
+					<div class=" w-100 h-25">
+						<div class="card w-75 h-75 m-auto">
+							<img th:src="@{|/assets/images/${product.image2}|}"
+								class="img-fluid">
+						</div>
+					</div>
+
+
+					<div class=" w-100 h-25">
+						<div class="card w-75 h-75 m-auto">
+							<img th:src="@{|/assets/images/${product.image3}|}"
+								class="img-fluid">
+						</div>
+					</div>
+
+
+					<div class=" w-100 h-25">
+						<div class="card w-75 h-75 m-auto">
+							<img th:src="@{|/assets/images/${product.image4}|}"
+								class="img-fluid">
+						</div>
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+		<div class="row">
+			<div class="col-5 ">
+				<div class="container"></div>
+			</div>
+
+			<div></div>
+		</div>
+		<hr>
+
+		<div class="row">
+			<div class="container">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active fw-bold text-black" id="home-tab"
+							data-bs-toggle="tab" data-bs-target="#home" type="button"
+							role="tab" aria-controls="home" aria-selected="true">Mô
+							tả</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link fw-bold text-black" id="profile-tab"
+							data-bs-toggle="tab" data-bs-target="#profile" type="button"
+							role="tab" aria-controls="profile" aria-selected="false">Hướng
+							dẫn mua hàng</button>
+					</li>
+
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel"
+						aria-labelledby="home-tab">
+						<div class="container m-3">
+							<div class="card p-4">
+								<p>
+								<div th:text="${product.description}"></div>
+
+								</p>
+								<p class="text-center">
+
+									<img th:src="@{|/assets/images/${product.image2}|}"
+										class="img-fluid" width="450px" height="300px">
+								</p>
+								<p>
+									Chọn màu xe theo ngũ hành <br> - Theo ngũ hành tương sinh
+									tương khắc, có nghĩa là việc chọn màu cũng nên chọn theo quy
+									luật tương sinh tương khắc với chủ nhân. <br> - Chọn màu
+									tương sinh với mệnh sẽ khiến bạn cảm thấy tự tin, may mắn,
+									thoải mái thanh thản. Bản thân màu tương sinh cũng khiến bạn
+									cảm thấy rất phù hợp. <br> - Chọn màu mà mệnh của bạn
+									tương sinh cũng hợp lý, khiến chiếc xe bền hơn và hợp với chủ
+									nhân. <br> - Bạn có thể chọn màu cùng mệnh, nhưng đừng quá
+									lạm dụng. Màu cũng mệnh sẽ khiến bạn yên ổn và an toàn nhưng
+									nếu nhiều màu cùng mệnh quá sẽ sinh ra dư thừa, phản tác dụng.
+									<br> - Cần tránh những màu tương khắc với mệnh của bạn.
+									Những màu tương khắc sẽ khiến sức khỏe của bạn bị ảnh hưởng,
+									tâm trí bất định, mất tập trung, hay bực bội nóng giận, dễ gặp
+									tai nạn hơn nếu lái xe, có thể bị thương tật. <br> - Bạn
+									cũng không nên lạm dụng những màu mà mệnh của bạn khắc, hay còn
+									gọi là khắc xuất. Những màu ấy tuy không ảnh hưởng đến bạn
+									nhưng sẽ khiến chiếc xe của bạn không ổn định, hay hỏng hóc khó
+									sửa chữa và khó giữ chiếc xe lâu dài.
+								</p>
+
+								<p class="text-center">
+									<img th:src="@{|/assets/images/${product.image3}|}"
+										class="img-fluid" width="450px" height="300px">
+								</p>
+							</div>
+
+
+
+
+						</div>
+
+					</div>
+					<div class="tab-pane fade" id="profile" role="tabpanel"
+						aria-labelledby="profile-tab">
+						<div class="container m-3">
+							<div class="card p-4">
+								<p>
+									Bước 1: Tìm sản phẩm cần mua Bạn có thể truy cập website để tìm
+									và chọn sản phẩm muốn mua bằng nhiều cách: <br> + Sử dụng
+									ô tìm kiếm phía trên, gõ tên sản phẩm muốn mua (có thể tìm đích
+									danh 1 sản phẩm, tìm theo hãng...). Website sẽ cung cấp cho bạn
+									những gợi ý chính xác để lựa chọn: <br> Bước 2: Đặt mua
+									sản phẩm Sau khi chọn được sản phẩm ưng ý muốn mua, bạn tiến
+									hành đặt hàng bằng cách: <br> + Chọn vào nút MUA NGAY nếu
+									bạn muốn thanh toán luôn toàn bộ giá tiền sản phẩm <br> +
+									Điền đầy đủ các thông tin mua hàng theo các bước trên website,
+									sau đó chọn hình thức nhận hàng là giao hàng tận nơi hay đến
+									siêu thị lấy hàng, chọn hình thức thanh toán là trả khi nhận
+									hàng hay thanh toán online (bằng thẻ ATM, VISA hay MasterCard)
+									và hoàn tất đặt hàng. <br> +Lưu ý: <br> 1. Chúng tôi
+									chỉ chấp nhận những đơn đặt hàng khi cung cấp đủ thông tin
+									chính xác về địa chỉ, số điện thoại. Sau khi bạn đặt hàng,
+									chúng tôi sẽ liên lạc lại để kiểm tra thông tin và thỏa thuận
+									thêm những điều có liên quan. <br> 2. Một số trường hợp
+									nhạy cảm: giá trị đơn hàng quá lớn & thời gian giao hàng vào
+									buổi tối địa chỉ giao hàng trong ngõ hoặc có thể dẫn đến nguy
+									hiểm. Chúng tôi sẽ chủ động liên lạc với quý khách để thống
+									nhất lại thời gian giao hàng cụ thể.
+								</p>
+
+							</div>
+
+
+
+
+						</div>
+
+
+
+					</div>
+
+				</div>
+			</div>
+			<h2>Thông số kỹ thuật</h2>
+
+			<table>
+				<tr>
+					<th>Thuộc tính</th>
+					<th>Thông số</th>
+				</tr>
+				<tr>
+					<td>Năm sản xuất</td>
+					<td th:text="${product.manufacturingYear}"></td>
+				</tr>
+				<tr>
+					<td>Hệ thống lái</td>
+					<td th:text="${product.driveSystem}"></td>
+				</tr>
+				<tr>
+					<td>Dung tích động cơ</td>
+					<td th:text="${product.engineCapacity}"></td>
+				</tr>
+				<tr>
+					<td>Loại động cơ</td>
+					<td th:text="${product.engine}"></td>
+				</tr>
+				<tr>
+					<td>Hộp số</td>
+					<td th:text="${product.transmission}"></td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div class="sanphamlienquan p-5"></div>
+		<hr>
+
+
+		<div class="row bg-secondary bg-opacity-25 h-50">
+			<div class="container">
+				<div class="row p-3">
+					<div class="col-sm-3">
+						<p class="fw-bold text-primary">Showroom</p>
+						<p>Tầng 6 - Tòa nhà Ladeco - 266 Đội Cấn, Hà Nội</p>
+					</div>
+
+					<div class="col-sm-3">
+						<p class="fw-bold text-primary">Giờ mở cửa</p>
+						<p>
+							Thứ 2 - Thứ 6: 8:00 - 21:00 <br> T hứ 7 - Chủ nhật: 8:30 -
+							22:30
+						</p>
+					</div>
+
+					<div class="col-sm-3">
+						<p class="fw-bold text-primary">Hỗ trợ và tư vấn</p>
+						<p>1900 6750</p>
+					</div>
+
+
+					<div class="col-sm-3">
+						<p class="fw-bold text-primary">Email</p>
+						<p>hyundaisonghan@gmail.com</p>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+		<script src="/assets/js/js.js"></script>
+	</article>
+</body>
+</html>

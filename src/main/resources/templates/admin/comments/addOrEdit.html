@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/main}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<body>
+	<article layout:fragment="content">
+		<div class="col-6 offset-3 mt-4">
+			
+				<form th:action="@{/admin/comments/saveOrUpdate}" method="post" th:object="${comment}">
+					<div class="card">
+						<div class="card-header">
+							<img src="/images/logos/INMA.jpg" alt="">
+							<h2>Thông tin của người dùng bình luận</h2>
+						</div>
+						<div class="card-body">
+					
+							<div class="form-group mt-3" >
+								<label for="">Mã bình luận:</label> 
+								
+								<input type="text"
+									class="form-control" th:field="*{cmtId}"
+									placeholder="" aria-describedby="customerIdHid" readonly="readonly" >
+									
+									
+									
+							</div>
+							<div class="form-group mt-3">
+								<label for="">Trạng thái</label> 
+								<input type="text" readonly
+									class="form-control" th:field="*{status}" placeholder=""
+									aria-describedby="statusHid"> <small 
+									th:if="${#fields.hasErrors('status')}" id="statusHid"
+									class="form-text text-muted"><div class="alert alert-danger mt-2" th:each="error : ${errors}">
+											<strong  th:text="${error.defaultMessage}">Động cơ không được trống</strong>
+										</div></small>
+							</div>
+							<div class="form-group mt-3">
+								<label for="">Ngày tạo:</label> 
+								
+								<input type="text" readonly
+									class="form-control" th:field="*{createDate}"
+									placeholder="" aria-describedby="createDateHid" > <small
+									th:if="${#fields.hasErrors('createDate')}" id="createDateHid" class="form-text text-muted"><div class="alert alert-danger mt-2" th:each="error : ${errors}">
+											<strong  th:text="${error.defaultMessage}">Động cơ không được trống</strong>
+										</div></small>
+							</div>
+							
+							<div class="form-group mt-3">
+								<label for="">Nội dung bình luận:</label> 
+							
+								<input type="text" readonly
+									class="form-control" th:field="*{cmtDescription}"
+									placeholder="" aria-describedby="cmtDescriptionHid" > <small
+									th:if="${#fields.hasErrors('cmtDescription')}" id="cmtDescription" class="form-text text-muted"><div class="alert alert-danger mt-2" th:each="error : ${errors}">
+											<strong  th:text="${error.defaultMessage}">Động cơ không được trống</strong>
+										</div></small>
+							</div>
+							
+							
+							
+							<div class="form-group mt-3">
+								<label for="">Tên tài khoản:</label> 
+								<input type="text"
+									class="form-control" th:field="*{username}"
+									placeholder="" aria-describedby="passwordHid"  readonly="readonly"> 
+							</div>
+							
+							
+
+						</div>
+						
+					</div>
+				</form>
+			</div>
+
+
+
+
+
+	</article>
+
+</body>
+</html>

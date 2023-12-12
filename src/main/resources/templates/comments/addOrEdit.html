@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+    <article layout:fragment="content">
+        <div class="container col-6 mt-4">
+            <div class="alert alert-primary" th:if="${message != null}" role="alert">
+                <i th:text="${message}">[[${message}]]</i>
+            </div>
+            <div class="alert alert-danger" th:if="${error != null}" role="alert">
+                <i th:text="${error}">[[${error}]]</i>
+            </div>
+
+            <h4 style="text-align: center;">Viết bình luận của tôi</h4>
+            <a style="margin-left: 400px; text-decoration: none;" href="/user/news">Danh sách bình luận</a>
+            <div class="col-7 p-3 m-auto">
+                <form th:action="@{/binhluan/saveComment}" method="post" th:object="${binhluan}">
+                    <div class="form-outline mb-4" style="position: relative;">
+                        <span th:if="${#fields.hasErrors('name')}" class="text-danger "
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 24px;"></i>
+                        </span>
+                        <input type="text" id="username" th:field="*{name}" class="form-control" placeholder="Tên người bình luận"/>
+
+                    </div>
+                    <div class="form-outline mb-4" style="position: relative;">
+                        <span th:if="${#fields.hasErrors('address')}" class="text-danger "
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 24px;"></i>
+                        </span>
+                        <input type="text" id="address" th:field="*{address}" class="form-control "
+                            placeholder="Địa chỉ" style="padding-right: 30px;" />
+                    </div>
+                    <div class="form-outline mb-4" style="position: relative;">
+                        <span th:if="${#fields.hasErrors('email')}" class="text-danger "
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 24px;"></i>
+                        </span>
+                        <input type="text" id="email" th:field="*{email}" class="form-control " placeholder="Email"
+                            style="padding-right: 30px;" />
+                    </div>
+                    <div class="form-outline mb-4" style="position: relative;">
+                        <span th:if="${#fields.hasErrors('cmtDescription')}" class="text-danger "
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 24px;"></i>
+                        </span>
+                        <input type="text" id="cmtDescription" th:field="*{cmtDescription}"
+                            class="form-control " placeholder="Mô tả " style="padding-right: 30px;" />
+                    </div>
+                   
+                    
+                    <hr>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block mb-3 w-100">Gửi bình luận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

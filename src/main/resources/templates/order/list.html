@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+ 
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <main>
+        <article layout:fragment="content">
+          <nav class="py-1" style="font-size: 20px; margin-left: 50px;--bs-breadcrumb-divider: '>'; " aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
+            </ol>
+            </nav>
+          <div class="card">
+           <div class="card-header text-center ">
+            <h4> ĐƠN HÀNG CỦA BẠN</h4>
+           </div>
+           <table class="table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Order No.</th>
+                <th>Ngày tạo đơn</th>
+                <th>Địa chỉ</th>
+                <th></th>
+              </tr>
+            </thead>
+             <tbody>
+              <tr th:each="order, state: ${orders}">
+                <td>[[${state.index}]]</td>
+                <td>[[${order.id}]]</td>
+                <td>[[${order.createDate}]]</td>
+                <td>[[${order.address}]]</td>
+                <td>
+                  <a th:href="@{|/order/detail/${order.id}|}" class="btn btn-danger">
+                    <b class="fa fa-search"></b>
+                  </a>
+
+                  <!--
+                   <a th:href="@{|/order/detail/delete/${order.id}|}" class="btn btn-secondary" onclick="return confirm('Are you sure you want to delete this order?')">
+              <b class="fa fa-trash"></b>
+          </a>
+          -->
+                </td>
+              </tr>
+             </tbody>
+         </table>
+          </div>
+  
+        </article>
+       
+  
+      </main>
+</body>
+</html>

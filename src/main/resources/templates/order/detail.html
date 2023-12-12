@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<article layout:fragment="content">
+		<main th:object="${order}">
+			<div class="card">
+				<h5 class="card-header text-center">THÔNG TIN BÁN XE</h5>
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="form-group col-sm-4">
+							<div>Mã đơn hàng</div>
+							<input th:field="*{id}" class="form-control" readonly>
+						</div>
+						<div class="form-group col-sm-4">
+
+							<div>Người dùng</div>
+							<input th:field="*{account.username}" class="form-control"
+								readonly>
+
+						</div>
+						<div class="form-group col-sm-4">
+
+							<div>Ngày tạo đơn</div>
+							<input th:field="*{createDate}" class="form-control" readonly>
+
+						</div>
+						
+						<div class="form-group col-sm-4">
+							<div>Phương thức thanh toán</div>
+							<input th:field="*{paymentMethod}" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-12">
+
+							<div>Địa chỉ</div>
+							<textarea th:field="*{address}" class="form-control" cols="110"
+								rows="3"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">DANH SÁCH BẠN ĐÃ ĐẶT HÀNG VÀ BÁN</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Mã đơn hàng chi tiết</th>
+								<th>Ảnh</th>
+							<th>Tên sản phẩm</th>
+							<th>Giá</th>
+							<th>Số lượng</th>
+							<th>Tổng</th>
+							<th>Trạng thái</th>
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr th:each="detail : ${orderDetails}">
+							<td th:text="${detail.product.id}"></td>
+							<td><img th:src="@{|/assets/images/${detail.product.image}|}" class="img-fluid" width="120px"></td>
+							<td th:text="${detail.product.name}"></td>
+							<td
+								th:text="${#numbers.formatDecimal(detail.price,0,'COMMA',2,'POINT')}"></td>
+							<td th:text="${detail.quantity}"></td>
+							<td
+								th:text="${#numbers.formatDecimal(detail.price * detail.quantity, 0, 'COMMA', 2, 'POINT')}"></td>
+								<td th:text="${detail.status}"></td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</main>
+	</article>
+
+
+
+</body>
+</html>

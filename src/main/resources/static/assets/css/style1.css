@@ -1,0 +1,116 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+.tendanhmuc a {
+    list-style: none;
+    transition: 0.6s ease;
+    text-decoration: none;
+   color: white;
+    font-weight: 100px;
+
+
+
+}
+.tendanhmuc a:hover{
+
+    text-align: center;
+    font-size: 14px;
+
+    color: aquamarine;
+    cursor: pointer;
+}
+.container{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 30px;
+    overflow: hidden;
+}
+
+.card{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   padding: 20px;
+
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+.card-header img{
+    width: 280px;
+
+}
+
+.card-body h1 {
+    font-size: 20px;
+    color:  rgb(81, 81, 138);
+    margin-top: 20px;
+}
+
+.card-body .rate{
+    width: 80px;
+    margin: 3px 0;
+}
+
+.card-body .price{
+    font-size: 20px;
+    color: rgb(81, 81, 138);
+    margin: 10px 0;
+
+}
+
+.card-body button{
+    border: 0;
+    padding: 10px 0;
+    border-radius: 5px;
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.card-body a {
+    border: 0;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgb(81, 81, 138);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+     text-decoration: none;
+}
+@media screen and (max-width: 900px){
+    .container{
+            grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card img{
+        width: 220px;
+
+    }
+}
+@media screen and (max-width: 750px){
+    .container{
+            grid-template-columns: repeat(2, 1fr);
+    }
+.card img {
+    width: 250px;
+}
+
+@media screen and (max-width: 500px){
+    .container{
+            grid-template-columns: repeat(1, 1fr);
+    }
+.card img {
+width: 250px;
+
+}
+}
+}
